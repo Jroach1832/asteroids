@@ -34,6 +34,11 @@ def main():
         #player.update(dt)
         for usprite in updatable:
             usprite.update(dt)
+
+        for asprite in asteroids:
+            if asprite.check_collision(player):
+                print("Game over!")
+                exit()
             
         pygame.display.flip()  # Update the display
 
