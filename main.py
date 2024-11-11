@@ -17,7 +17,7 @@ def main():
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
-    Shot.containers = (drawable, updatable)
+    Shot.containers = (shots, drawable, updatable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_RADIUS)
     asteroidfield = AsteroidField()
 
@@ -37,6 +37,12 @@ def main():
         #player.update(dt)
         for usprite in updatable:
             usprite.update(dt)
+
+        for asprite in asteroids:
+            for shot in shots:
+                if asprite.check_collision(shot):
+                    asprite.split() #asprite.kill()
+                    shot.kill()
 
         for asprite in asteroids:
             if asprite.check_collision(player):
